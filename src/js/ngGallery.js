@@ -60,11 +60,6 @@
 				images: '=',
 				thumbsNum: '@'
 			},
-			controller: function($scope) {
-				$scope.$on('openGallery', function(e, args) {
-					$scope.openGallery(args.index);
-				});
-			},
 			templateUrl: function (element, attrs) {
 				return attrs.templateUrl || defaults.templateUrl;
 			},
