@@ -31,7 +31,7 @@
 		$templateCache.put(template_url,
 			'<div class="{{ baseClass }}">' +
 			'  <div ng-repeat="i in images">' +
-			'    <img ng-src="{{ i.thumb }}" class="{{ thumbClass }} {{ showDeletePictureForm }}" ng-click="openGallery($index)" alt="Image {{ $index + 1 }}" />' +
+			'    <img ng-src="{{ i.thumb }}" class="{{ thumbClass }}" ng-click="showDeletePictureForm ? deletePicture($index) : openGallery($index)" alt="Image {{ $index + 1 }}" />' +
 			'  </div>' +
 			'</div>' +
 			'<div class="ng-overlay" ng-show="opened">' +
