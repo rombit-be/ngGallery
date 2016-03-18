@@ -40,7 +40,7 @@ img.ng-thumb {
 }
 
 .ng-gallery-content > a.close-popup {
-  font-size: 42px;
+  font-size: 30px;
   float: right;
   color: #fff;
   text-decoration: none;
@@ -51,8 +51,8 @@ img.ng-thumb {
   right: 0;
 }
 
-.ng-gallery-content > a.download-image {
-  font-size: 42px;
+.ng-gallery-content > a.remove-image {
+  font-size: 30px;
   float: right;
   color: #fff;
   text-decoration: none;

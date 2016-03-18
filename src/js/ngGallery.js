@@ -38,7 +38,7 @@
 			'</div>' +
 			'<div class="ng-gallery-content" unselectable="on" ng-show="opened" ng-swipe-left="nextImage()" ng-swipe-right="prevImage()">' +
 			'  <div class="uil-ring-css" ng-show="loading"><div></div></div>' +
-			'  <a class="download-image" ng-click="removeImage($event, index)"><i class="fa fa-trash"></i></a>' +
+			'  <a class="remove-image" ng-click="removeImage($event, index)"><i class="fa fa-trash"></i></a>' +
 			'  <a class="close-popup" ng-click="closeGallery()"><i class="fa fa-close"></i></a>' +
 			'  <a class="nav-left" ng-click="prevImage()"><i class="fa fa-angle-left"></i></a>' +
 			'  <img ondragstart="return false;" draggable="false" ng-src="{{ img }}" ng-click="nextImage()" ng-show="!loading" class="effect" />' +
