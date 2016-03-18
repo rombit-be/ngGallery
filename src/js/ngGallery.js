@@ -3,9 +3,9 @@
 
 	angular.module('jkuri.gallery', []).directive('ngGallery', ngGallery);
 
-	ngGallery.$inject = ['$document', '$timeout', '$q', '$templateCache', '$rootScope'];
+	ngGallery.$inject = ['$document', '$timeout', '$q', '$templateCache'];
 
-	function ngGallery( $document, $timeout, $q, $templateCache, $rootScope ) {
+	function ngGallery( $document, $timeout, $q, $templateCache ) {
 
 		var defaults = {
 			baseClass: 'ng-gallery',
@@ -58,7 +58,8 @@
 			restrict: 'EA',
 			scope: {
 				images: '=',
-				thumbsNum: '@'
+				thumbsNum: '@',
+           	    onDelete: '&'
 			},
 			templateUrl: function (element, attrs) {
 				return attrs.templateUrl || defaults.templateUrl;
@@ -122,8 +123,8 @@
                 };
 
                 scope.removeImage = function ($event, indexImage) {
-                    var gallery = ($event.target).closest("ng-gallery").className;
-                    $rootScope.removeImage(indexImage, gallery);
+                    var gallery = $event.target.closest("ng-gallery").className;
+                    scope.onDelete({indexImage, gallery});
                     scope.closeGallery();
                 };
 
