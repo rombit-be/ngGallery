@@ -3,9 +3,9 @@
 
 	angular.module('jkuri.gallery', []).directive('ngGallery', ngGallery);
 
-	ngGallery.$inject = ['$document', '$timeout', '$q', '$templateCache'];
+	ngGallery.$inject = ['$document', '$timeout', '$q', '$templateCache', '$rootScope'];
 
-	function ngGallery( $document, $timeout, $q, $templateCache ) {
+	function ngGallery( $document, $timeout, $q, $templateCache, $rootScope ) {
 
 		var defaults = {
 			baseClass: 'ng-gallery',
@@ -31,14 +31,14 @@
 		$templateCache.put(template_url,
 			'<div class="{{ baseClass }}">' +
 			'  <div ng-repeat="i in images">' +
-			'    <img ng-src="{{ i.thumb }}" class="{{ thumbClass }}" ng-click="showDeletePictureForm ? deletePicture($index) : openGallery($index)" alt="Image {{ $index + 1 }}" />' +
+			'    <img ng-src="{{ i.thumb }}" class="{{ thumbClass }}" ng-click="openGallery($index)" alt="Image {{ $index + 1 }}" />' +
 			'  </div>' +
 			'</div>' +
 			'<div class="ng-overlay" ng-show="opened">' +
 			'</div>' +
 			'<div class="ng-gallery-content" unselectable="on" ng-show="opened" ng-swipe-left="nextImage()" ng-swipe-right="prevImage()">' +
 			'  <div class="uil-ring-css" ng-show="loading"><div></div></div>' +
-			'<a href="{{getImageDownloadSrc()}}" target="_blank" ng-show="showImageDownloadButton()" class="download-image"><i class="fa fa-download"></i></a>' +
+			'  <a class="download-image" ng-click="removeImage($event, index)"><i class="fa fa-trash"></i></a>' +
 			'  <a class="close-popup" ng-click="closeGallery()"><i class="fa fa-close"></i></a>' +
 			'  <a class="nav-left" ng-click="prevImage()"><i class="fa fa-angle-left"></i></a>' +
 			'  <img ondragstart="return false;" draggable="false" ng-src="{{ img }}" ng-click="nextImage()" ng-show="!loading" class="effect" />' +
@@ -116,10 +116,16 @@
 					return angular.isDefined(image.downloadSrc) && 0 < image.downloadSrc.length;
 				};
 
-				scope.getImageDownloadSrc = function () {
-					if(scope.images[scope.index] == null ||  scope.images[scope.index].downloadSrc == null) return
-					return scope.images[scope.index].downloadSrc;
-				};
+                scope.getImageDownloadSrc = function () {
+                    if(scope.images[scope.index] == null ||  scope.images[scope.index].downloadSrc == null) return
+                    return scope.images[scope.index].downloadSrc;
+                };
+
+                scope.removeImage = function ($event, indexImage) {
+                    var gallery = ($event.target).closest("ng-gallery").className;
+                    $rootScope.removeImage(indexImage, gallery);
+                    scope.closeGallery();
+                };
 
 				scope.changeImage = function (i) {
 					scope.index = i;
