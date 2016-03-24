@@ -123,7 +123,7 @@
                 };
 
                 scope.removeImage = function ($event, indexImage) {
-                    var gallery = $event.target.closest("ng-gallery").className;
+                    var gallery = $event.target.closest("ng-gallery").id;
                     scope.onDelete({indexImage, gallery});
                     scope.closeGallery();
                 };
