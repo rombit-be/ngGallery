@@ -124,7 +124,7 @@
 
                 scope.removeImage = function ($event, indexImage) {
                     var gallery = $event.target.closest("ng-gallery").id;
-                    scope.onDelete({indexImage, gallery});
+                    scope.onDelete({indexImage: indexImage, gallery: gallery});
                     scope.closeGallery();
                 };
 
