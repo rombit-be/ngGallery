@@ -117,16 +117,19 @@
 					return angular.isDefined(image.downloadSrc) && 0 < image.downloadSrc.length;
 				};
 
-                scope.getImageDownloadSrc = function () {
-                    if(scope.images[scope.index] == null ||  scope.images[scope.index].downloadSrc == null) return
-                    return scope.images[scope.index].downloadSrc;
-                };
-
-                scope.removeImage = function ($event, indexImage) {
-                    var gallery = $event.target.closest("ng-gallery").id;
-                    scope.onDelete({indexImage: indexImage, gallery: gallery});
-                    scope.closeGallery();
-                };
+		                scope.getImageDownloadSrc = function () {
+		                    if(scope.images[scope.index] == null ||  scope.images[scope.index].downloadSrc == null) return
+		                    return scope.images[scope.index].downloadSrc;
+		                };
+		
+		                scope.removeImage = function ($event, indexImage) {
+					var response = confirm("Are you sure you want to delete this picture?");
+					if (response == true) {
+						var gallery = $event.target.closest("ng-gallery").id;
+						scope.onDelete({indexImage: indexImage, gallery: gallery});
+						scope.closeGallery();
+					}
+		                };
 
 				scope.changeImage = function (i) {
 					scope.index = i;
