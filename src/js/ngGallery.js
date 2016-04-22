@@ -125,8 +125,7 @@
 		                scope.removeImage = function ($event, indexImage) {
 					var response = confirm("Are you sure you want to delete this picture?");
 					if (response == true) {
-						var gallery = $event.target.closest("ng-gallery").id;
-						scope.onDelete({indexImage: indexImage, gallery: gallery});
+						scope.onDelete({indexImage: indexImage});
 						scope.closeGallery();
 					}
 		                };
