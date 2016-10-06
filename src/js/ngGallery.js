@@ -30,20 +30,21 @@
 		// Set the default template
 		$templateCache.put(template_url,
 			'<div class="{{ baseClass }}">' +
-			'  <div ng-repeat="i in images">' +
-			'    <img ng-src="{{ i.thumb }}" class="{{ thumbClass }}" ng-click="openGallery($index)" alt="Image {{ $index + 1 }}" />' +
+			'  <div ng-repeat="i in images" class="thumb-container">' +
+			'    <img ng-src="{{ i.thumb }}" class="{{ thumbClass }}" ng-click="openGallery($index)" ng-attr-title="{{ i.createdAt | date: "dd/MM/yy - HH:mm" }}" alt="Image {{ $index + 1 }}" />' +
+			'    <p><span>{{ i.createdAt | date: "dd/MM/yy HH:mm" }}</span></p>' +
 			'  </div>' +
 			'</div>' +
 			'<div class="ng-overlay" ng-show="opened">' +
 			'</div>' +
 			'<div class="ng-gallery-content" unselectable="on" ng-show="opened" ng-swipe-left="nextImage()" ng-swipe-right="prevImage()">' +
 			'  <div class="uil-ring-css" ng-show="loading"><div></div></div>' +
-			'  <a class="remove-image" ng-click="removeImage($event, index)"><i class="fa fa-trash"></i></a>' +
-			'  <a class="close-popup" ng-click="closeGallery()"><i class="fa fa-close"></i></a>' +
-			'  <a class="nav-left" ng-click="prevImage()"><i class="fa fa-angle-left"></i></a>' +
+			'  <a class="remove-image" ng-click="removeImage($event, index)"><i class="material-icons">delete</i></a>' +
+			'  <a class="close-popup" ng-click="closeGallery()"><i class="material-icons">clear</i></a>' +
+			'  <a class="nav-left" ng-click="prevImage()"><i class="material-icons">keyboard_arrow_left</i></a>' +
 			'  <img ondragstart="return false;" draggable="false" ng-src="{{ img }}" ng-click="nextImage()" ng-show="!loading" class="effect" />' +
-			'  <a class="nav-right" ng-click="nextImage()"><i class="fa fa-angle-right"></i></a>' +
-			'  <span class="info-text">{{ index + 1 }}/{{ images.length }} - {{ description }}</span>' +
+			'  <a class="nav-right" ng-click="nextImage()"><i class="material-icons">keyboard_arrow_right</i></a>' +
+			'  <span class="info-text">{{ index + 1 }}/{{ images.length }} - {{ description }} ({{ createdAt | date: "HH:mm - dd/MM/yy" }})</span>' +
 			'  <div class="ng-thumbnails-wrapper">' +
 			'    <div class="ng-thumbnails slide-left">' +
 			'      <div ng-repeat="i in images">' +
@@ -109,6 +110,7 @@
 						smartScroll(scope.index);
 					});
 					scope.description = scope.images[i].description || '';
+					scope.createdAt = scope.images[i].createdAt || '';
 				};
 
 				scope.showImageDownloadButton = function () {
@@ -121,7 +123,7 @@
 		                    if(scope.images[scope.index] == null ||  scope.images[scope.index].downloadSrc == null) return
 		                    return scope.images[scope.index].downloadSrc;
 		                };
-		
+
 		                scope.removeImage = function ($event, indexImage) {
 					var response = confirm("Are you sure you want to delete this picture?");
 					if (response == true) {
