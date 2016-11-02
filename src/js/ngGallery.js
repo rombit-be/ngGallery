@@ -32,7 +32,7 @@
 			'<div class="{{ baseClass }}">' +
 			'  <div ng-repeat="i in images" class="thumb-container">' +
 			'    <img ng-src="{{ i.thumb }}" class="{{ thumbClass }}" ng-click="openGallery($index)" ng-attr-title="{{ i.createdAt | date: "dd/MM/yy - HH:mm" }}" alt="Image {{ $index + 1 }}" />' +
-			'    <p><span>{{ i.createdAt | date: "dd/MM/yy HH:mm" }}</span></p>' +
+			'    <p ng-if="i.createdAt"><span>{{ i.createdAt | date: "dd/MM/yy HH:mm" }}</span></p>' +
 			'  </div>' +
 			'</div>' +
 			'<div class="ng-overlay" ng-show="opened">' +
