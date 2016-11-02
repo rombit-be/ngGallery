@@ -18,8 +18,8 @@ img.ng-thumb {
 
 .thumb-container p {
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 7px;
+    left: 5px;
     width: 100%;
     display: none;
 }
